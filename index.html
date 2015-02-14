@@ -1,0 +1,376 @@
+<html>
+  <head>
+    <title>Clean Web: D3.js</title>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+  
+    <script scr="scripts/htmlmixed.js"></script>
+    <script src="scripts/code_mirror.js"></script>
+    <script src="scripts/color.js"></script>
+    <script src="scripts/css.js"></script>
+    <script src="scripts/xml.js"></script>
+    <link href="css/setosa.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/codemirror.css">
+    
+    <style>
+
+
+      
+
+    </style>
+  </head>
+  <body>
+    <section class="title">
+      <div class="title-region">
+        <h1 class="title">Live Coding D3.js</h1>
+        <h3 class="by-line">
+          <ul class="list-inline">
+            <li><a href="mailto:m.taptich@berkeley.edu"><i class="fa fa-envelope-o fa-2x"></i></a></li>
+            <li><a href="https://twitter.com/MikeTaptich"><i class="fa fa-twitter fa-2x"></a></i></li>
+            <li><a href="http://www.linkedin.com/pub/michael-taptich/21/263/b28/"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+            <li><a href="https://github.com/mtaptich"><i class="fa fa-github fa-2x"></i></a></li>
+          </ul>
+        </h3>
+
+      </div>
+    </section>
+    <section>
+      <div class="well">
+        <iframe id="preview" scrolling ="no" frameborder="0" height="480px" width="100%"></iframe>
+        <hr>
+        <textarea id="code" name="code">
+<!DOCTYPE html>
+<html>
+<style>
+  body{
+    font-size: 18px;
+    font-family: "Lato", "PT Serif", serif;
+    text-align: center;
+  }
+
+  .y.axis path,
+  .axis line {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 0.5px;
+    shape-rendering: crispEdges;
+  }
+
+  .x.axis{
+    font-size: 13px;
+  }
+
+  .x.axis path{
+    stroke: #000;
+    fill: none;
+  }
+
+  .areaIB {
+    fill: #76AACB;
+    opacity: 0.45;
+  }
+
+  .line{
+    fill: none;
+    stroke: #ca8546;
+    stroke-width: 2px;
+    stroke-dasharray: 10,5;
+  }
+
+  .linetrue{
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+  }
+
+  .IBmed{
+    fill: none;
+    stroke: #2D3B68;
+    stroke-width: 2px;
+    stroke-dasharray: 10,5;
+  }
+
+  .griderror{
+    fill: none;
+    stroke: #fff;
+    stroke-width: 0.5px;
+    stroke-dasharray: 10,5;
+  }
+
+  .grid{
+    fill: none;
+    stroke: #e0dfdf;
+    stroke-width: 0.5px;
+    stroke-dasharray: 10,5;
+  }
+
+  .box{
+    stroke: none;
+    fill: #f5f4f3;
+  }
+
+
+  line.arrow {
+      stroke: #666;
+      stroke-width: 1px;
+  }
+
+
+</style>
+
+<!-- load libraries here -->
+<script src="http://d3js.org/d3.v3.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+
+
+<body>
+
+</body>
+
+<script type="text/javascript">  // write your d3.js code here
+  // buffer edges with a margin
+  var margin = {top: 20, right: 20, bottom: 30, left: 65},
+    width = 450 - margin.left - margin.right,
+    height = 450 - margin.top - margin.bottom;
+
+  var formatTime = d3.time.format("%H:%M"), // Convert time object into hour and minutes
+      parseTime = d3.time.format("%H:%M:%S").parse; // convert hour and minutes to time format
+
+  var x = d3.time.scale()
+      .range([0, width]); 
+
+  var y = d3.scale.linear()
+      .range([height, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .ticks(7) // number of time ticks
+      .tickFormat(formatTime)
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .ticks(7)
+
+  /* Remove to show grid (1/2)
+  var grid = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .tickSize(-width, 0, 0)
+      .tickFormat("")
+  */
+  
+  var lineIBave = d3.svg.line()
+        .interpolate("monotone")
+        .x(function(d) { return x(d.minutes); })
+        .y(function(d) { return y(d.IBave); });
+
+  /* Remove to show median (1/2)
+  var lineIBmed = d3.svg.line()
+        .interpolate("monotone") // https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate
+        .x(function(d) {  return x(d.minutes); })
+        .y(function(d) { return y(d.IBmed); });
+  */
+
+  /* Remove to show area (1/2)
+  var areaIB = d3.svg.area()
+      .interpolate("monotone")
+      .x(function(d) { return x(d.minutes); })
+      .y0(function(d) { return y(d.IB10); })
+      .y1(function(d) { return y(d.IB90); });
+  */
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")"); //
+
+
+  // Ridership Data from SFMTA
+  d3.csv("data/38_Geary_ridership_stats.csv", function(error, data) {
+    
+    // Loop through data, updating the data formats
+    data.forEach(function(d) {
+      d.minutes = parseTime(d.minutes);
+      d.IBmed = +d.IBmed;
+      d.IBave = d.IBave;
+      d.IB10 = +d.IB10;
+      d.IB90 = +d.IB90;
+    });
+
+    // update the domain, or the range of results show.
+    x.domain(d3.extent(data, function(d) { return d.minutes; })).nice();
+    y.domain([0,80]).nice();
+
+
+    /* Remove to show background (1/1)
+    svg.append("rect")
+      .attr("class", "box")
+      .attr("width", width)
+      .attr("height", height)
+
+    */
+
+    /* Remove to show grid (2/2)
+    svg.append("g")
+        .attr("class", "grid")
+        .call(grid)
+    */
+
+
+    /* Remove to show text (1/1)
+    svg.append("text")
+      .attr("x", width/2)
+      .attr("y", 40)
+      .text("Inbound Bus")
+      .style("font-size", 24)
+      //.style("text-anchor", "middle"); // "end", "start"
+    */
+  
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -55)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Bus Passengers, riders");
+
+    /* Remove to show area (2/2)
+    svg.append("path")
+        .datum(data)
+        .attr("class", "areaIB")
+        .attr("d", areaIB);
+    */
+
+   svg.append("path")
+        .datum(data)
+        .attr("class", "linetrue")
+        .attr("d", lineIBave);
+
+    /* Remove to show median (2/2)
+    svg.append("path")
+        .datum(data)
+        .attr("class", "IBmed")
+        .attr("d", lineIBmed);
+    */
+
+
+    /* Remove to show legend (1/1)
+    svg.append("line")
+        .attr("class", "linetrue")
+        .attr("x1", 253)
+        .attr("x2", 273)
+        .attr("y1", 143)
+        .attr("y2",143)
+    
+    svg.append("text")
+      .attr("class", "label")
+      .attr("x", 276)
+      .attr("y", 146)
+      .text("Average")
+
+    svg.append("line")
+        .attr("class", "IBmed")
+        .attr("x1", 253)
+        .attr("x2", 273)
+        .attr("y1", 159)
+        .attr("y2",159)
+    
+    svg.append("text")
+      .attr("class", "label")
+      .attr("x", 276)
+      .attr("y", 162)
+      .text("Median")
+
+
+    // add text and arrow
+    svg.append("defs").append("marker")
+            .attr("id", "arrow")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 8)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+          .append("path")
+            .attr("class", "marker")
+            .attr("d", "M0,-5L10,0L0,5");
+    
+    svg.append("text")
+        .attr("class", "label")
+        .attr("x", 290)
+        .attr("y",  178)
+        .style("text-anchor", "middle")
+        .text("Middle 80%");
+    
+    svg.selectAll("line.arrow")
+            .data([2,2])
+          .enter().append("svg:line")
+        .attr("class", "arrow")
+        .attr("x1", 280)
+        .attr("x2", 260)
+        .attr("y1", 180)
+        .attr("y2",200)
+        .attr("class", "link arrow")
+        .attr("marker-end", "url(#arrow)");
+    */
+  });
+</script>
+</html>
+    </textarea>
+  </div>
+
+  </section>
+
+ 
+
+<script>
+  var delay1;
+  // Initialize CodeMirror editor with a nice html5 canvas demo.
+  var editor1 = CodeMirror.fromTextArea(document.getElementById('code'), {
+    mode: 'text/html'
+  });
+  editor1.on("change", function() {
+    clearTimeout(delay1);
+    delay = setTimeout(updatePreview1, 300);
+  });
+  
+  function updatePreview1() {
+    var previewFrame1 = document.getElementById('preview');
+    var preview1 =  previewFrame1.contentDocument ||  previewFrame1.contentWindow.document;
+    preview1.open();
+    preview1.write(editor1.getValue());
+    preview1.close();
+  }
+  setTimeout(updatePreview1, 300);
+</script> 
+
+
+  
+            <div class="text-center"><h1><a target="_blank" href="http://www.linkedin.com/pub/michael-taptich/21/263/b28/">#AboutMeQuick</a></h1> <p class="lead">I am a civil engineering Ph.D. student developing a comprehensive understanding of the nexuses shared between civil systems, energy, and our environment. My research focuses on providing methods and tools to enable high resolution life cycle assessments of civil systems (e.g., transportation networks, biofuel production, water distribution, etc.). </p><p class="lead">I am also a co-founder of the Visualizing Urban Data IdeaLab at UC Berkeley.  Check out some of my data visualizations at: <a href="http://www.ghggo.com/home">http://www.ghggo.com/home</a></p></div>
+              <div class="text-center">
+                <hr>
+                <p>Copyright &copy; Mike Taptich 2014</p>
+              </div>
+       
+ 
+
+ <!-- Core JavaScript Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+  </body>
+</html>
