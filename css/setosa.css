@@ -22,7 +22,6 @@ body {
 
 }
 
-
 svg text {
   font-family: "Lato", "PT Serif", serif;
 }
@@ -34,14 +33,52 @@ p {
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
 }
-.setosa-logo {
-  background-image: url("/ev//img/setosa.png");
-  width: 70px;
-  height: 17px;
-  display: inline-block;
-  background-size: 100%;
-  vertical-align: middle;
+
+code, textarea {
+  font-family: "Menlo", monospace;
 }
+
+code {
+  line-height: 1em;
+}
+
+.html .attribute,
+.css .attribute,
+.javascript .string,
+.javascript .special {
+  color: #e6550d;
+}
+
+.javascript .keyword{
+  color:rgb(231, 76, 60);
+}
+
+.html .doctype,
+.javascript .number {
+  color: #31a354;
+}
+
+pre {
+  border: none;
+  border-left: solid 2px #ccc;
+  padding-left: 50px;
+  background-color: #fff;
+}
+
+code{
+  background-color: #fff;
+  line-height: 1.4em;
+}
+
+body > blockquote {
+  width: 640px;
+}
+
+blockquote q {
+  display: block;
+  font-style: oblique;
+}
+
 .landing .title {
   font-size: 110px;
   margin: 0;

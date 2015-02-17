@@ -17,9 +17,6 @@
     
     <style>
 
-
-      
-
     </style>
   </head>
   <body>
@@ -38,10 +35,401 @@
       </div>
     </section>
     <section>
-      <div class="well">
-        <iframe id="preview" scrolling ="no" frameborder="0" height="480px" width="100%"></iframe>
-        <hr>
-        <textarea id="code" name="code">
+      <h2>Three Little Circles</h2>
+      <p>D3 is most useful when used to generate and manipulate visuals as <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank">SVGs</a> because SVGs can be transformed and scaled witout suffering from <a href="http://en.wikipedia.org/wiki/Pixelation" target="_blank">pixelation</a>. All major modern web browsers - including Mozilla Firefox, Internet Explorer, Google Chrome, Opera, and Safari - have at least some degree of SVG support and can render the markup directly.</p>
+      <p> Before we get into examples in d3.js, let's briefly review SVGs in html.  This will give you a better idea of how d3.js utilizes <a href="http://en.wikipedia.org/wiki/JavaScript" traget="_blank">javascript</a> to animate data visualizations. Check out the code below; it shows a SVG circle in html.</p>
+      <div class="col-xs-12 well">
+        <div class="row">
+          <div class="col-xs-4"  style="background-color: none;">
+            <iframe id="static" scrolling ="no" frameborder="0" height="200px" width="100%"></iframe> 
+          </div>
+          <div class="col-xs-8" style="background-color: #fff;">
+            <textarea id="3lc_static" name="3lc_static">
+<html>
+  <style>
+  <!-- CSS goes here -->
+    
+
+  </style>
+  <!-- load libraries here -->
+  <script src="http://d3js.org/d3.v3.js"></script>
+
+  <body>
+    <div id="main">
+      <svg width="300" height="600">
+        <circle cx="40" cy="60" r="10" style=""></circle>
+        <circle cx="80" cy="60" r="10" style=""></circle>
+        <circle cx="120" cy="60" r="10" style=""></circle>
+      </svg>
+
+    <!-- Useful svg styles 
+      stroke: #000;
+      stroke-width: 1px;
+      fill: steelblue;
+      fill-opacity: 0.5;
+      stroke-dasharray: 2,2;
+    -->
+    </div>
+  </body>
+</html>
+            </textarea>
+            <script>
+              var delay1;
+              // Initialize CodeMirror editor with a nice html5 canvas demo.
+              var editor1 = CodeMirror.fromTextArea(document.getElementById('3lc_static'), {
+                lineNumbers: true,
+                mode: 'text/html'
+              });
+              editor1.on("change", function() {
+                clearTimeout(delay1);
+                delay1 = setTimeout(updatePreview1, 300);
+              });
+              
+              function updatePreview1() {
+                var previewFrame1 = document.getElementById('static');
+                var preview1 =  previewFrame1.contentDocument ||  previewFrame1.contentWindow.document;
+                preview1.open();
+                preview1.write(editor1.getValue());
+                preview1.close();
+              }
+              setTimeout(updatePreview1, 300);
+            </script> 
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12">
+          <div>
+            <p> I like to think of the browser (e.g., viewer), JavaScript (e.g., language), and d3.js (e.g., a library within JavaScript) as a flipbook. The <a href="http://www.w3.org/2002/07/26-dom-article.html" target="_blank">Document Object Model</a> is an interface (e.g., the page) that will allow programs and scripts to dynamically access and update the content, structure, and style of the documents (e.g, the flipping of pages). With the object model, JavaScript gets all the power it needs to create 
+            dynamic HTML: </p>
+            <h4>
+            <ul>
+                <li>JavaScript can change all the HTML elements in the page</li>
+                <li>JavaScript can change all the HTML attributes in the page</li>
+                <li>JavaScript can change all the CSS styles in the page</li>
+                <li>JavaScript can remove existing HTML elements and attributes</li>
+                <li>JavaScript can add new HTML elements and attributes</li>
+                <li>JavaScript can react to all existing HTML events in the page</li>
+                <li>JavaScript can create new HTML events in the page</li>
+            </ul>
+            </h4>
+            <p>Okay, let's revist the same <code>svg</code> image, using D3 this sime.</p>
+          </div>
+      </div>
+
+      <div class="col-xs-12 well">
+        <div class="row">
+          <div class="col-xs-4"  style="background-color: none;">
+            <iframe id="littlecircles" scrolling ="no" frameborder="0" height="200px" width="100%"></iframe> 
+          </div>
+          <div class="col-xs-8" style="background-color: #fff;">
+            <textarea id="3lc" name="3lc">
+<html>
+  <script src="http://d3js.org/d3.v3.js"></script>
+  <body>
+    <div id="main"></div>
+  </body>
+  <script type="text/javascript">  // write your d3.js code here
+    var svg = d3.select("#main").append("svg")
+        .attr("width", 300)
+        .attr("height", 600)
+
+    svg.append("circle")
+      .attr("cx", 40)
+      .attr("cy", 60)
+      .attr("r", 10);
+
+    svg.append("circle")
+      .attr({
+        cx: 80,
+        cy: 60,
+        r: 10
+      })
+      .style("fill", "#000")
+      .style("opacity", 0.5);
+
+    svg.append("circle")
+      .attr({
+        cx: 120,
+        cy: 60,
+        r: 10,
+        fill: "#000",
+        opacity: 0.5
+      });
+  </script>
+  <!-- Right click a circle and choose 'Inspect Element' to see the rendered SVG -->
+</html>          </textarea>
+              <script>
+              var delay2;
+              // Initialize CodeMirror editor with a nice html5 canvas demo.
+              var editor2 = CodeMirror.fromTextArea(document.getElementById('3lc'), {
+                lineNumbers: true,
+                mode: 'text/html'
+              });
+              editor2.on("change", function() {
+                clearTimeout(delay2);
+                delay = setTimeout(updatePreview2, 300);
+              });
+              
+              function updatePreview2() {
+                var previewFrame2 = document.getElementById('littlecircles');
+                var preview2 =  previewFrame2.contentDocument ||  previewFrame2.contentWindow.document;
+                preview2.open();
+                preview2.write(editor2.getValue());
+                preview2.close();
+              }
+              setTimeout(updatePreview2, 300);
+            </script> 
+          </div>
+        </div>
+      </div>
+
+
+      <p>As you can see above, the <a href="https://github.com/mbostock/d3/wiki/Selections#wiki-append">append</a> method allows you to create a single element. This is can be  useful in small applications.  If we want to scale this process, we need to utilize D3's <em>data join</em> methods which creates and updates elements corresponding to your data.  </p>
+
+      <pre><code class="javascript">svg.selectAll(<span class="string">"circle"</span>)
+      .data(data)
+    .enter().append(<span class="string">"circle"</span>)
+      .attr(<span class="string">"cx"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.x; })
+      .attr(<span class="string">"cy"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.y; })
+      .attr(<span class="string">"r"</span>, <span class="number">10</span>);</code></pre>
+      
+      <br>
+       <div class="col-xs-12 well">
+        <div class="row">
+          <div class="col-xs-4"  style="background-color: none;">
+            <iframe id="littlecircles_select" scrolling ="no" frameborder="0" height="200px" width="100%"></iframe> 
+          </div>
+          <div class="col-xs-8" style="background-color: #fff;">
+            <textarea id="3lc_select" name="3lc_select">
+<html>
+  <script src="http://d3js.org/d3.v3.js"></script>
+  <body> <div id="main"></div></body>
+  <script type="text/javascript">  // write your d3.js code here
+    var svg = d3.select("#main").append("svg")
+        .attr("width", 300)
+        .attr("height", 600)
+
+    data = [{x: 40, y:60, size:40}, {x: 80, y:60, size: 20}, {x: 120, y:60, size: 60}];
+
+    svg.selectAll("circle")
+      .data(data)
+    .enter().append("circle")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+      .attr("r", 10)
+      //.attr("r", scalemycircle);
+
+      // You can even join mouse events to your circle elements.
+      /*
+      .on("mouseover", function(){ 
+        var mycircle = d3.select(this);
+        mycircle.transition().duration(100).attr("r", 3)
+      })
+      .on("mouseout", function(){ 
+        var mycircle = d3.select(this);
+        mycircle.transition().duration(100).attr("r", 10)
+      })
+      */
+
+    function scalemycircle(d){
+      return d.size/2;
+    }
+  </script>
+</html>          </textarea>
+              <script>
+              var delay3;
+              // Initialize CodeMirror editor with a nice html5 canvas demo.
+              var editor3 = CodeMirror.fromTextArea(document.getElementById('3lc_select'), {
+                lineNumbers: true,
+                mode: 'text/html'
+              });
+              editor3.on("change", function() {
+                clearTimeout(delay3);
+                delay = setTimeout(updatePreview3, 300);
+              });
+              
+              function updatePreview3() {
+                var previewFrame3 = document.getElementById('littlecircles_select');
+                var preview3 =  previewFrame3.contentDocument ||  previewFrame3.contentWindow.document;
+                preview3.open();
+                preview3.write(editor3.getValue());
+                preview3.close();
+              }
+              setTimeout(updatePreview3, 300);
+            </script> 
+          </div>
+        </div>
+      </div>
+
+    <p>Mike Bostock has a great explanation of the data joing process on <a href="http://bost.ocks.org/mike/join/" target="_blank">one his blog posts</a>.  Here is what he has to say in brief:
+        <span style="margin-left: 10%; width: 80%;">
+        <blockquote style="margin-top:-30px;"> <li><p>First, <code>svg.selectAll("circle")</code> returns a new empty selection, since the SVG container was empty. The parent node of this selection is the SVG container.
+          <li><p>This selection is then joined to an array of data, resulting in three new selections that represent the three possible states: <i>enter</i>, <i>update</i>, and <i>exit</i>. Since the selection was empty, the update and exit selections are empty, while the enter selection contains a placeholder for each new datum.
+
+          <li><p>The update selection is returned by <a href="https://github.com/mbostock/d3/wiki/Selections#wiki-data">selection.data</a>, while the enter and exit selections hang off the update selection; <a href="https://github.com/mbostock/d3/wiki/Selections#wiki-enter">selection.enter</a> thus returns the enter selection.
+
+          <li><p>The missing elements are added to the SVG container by calling <a href="https://github.com/mbostock/d3/wiki/Selections#wiki-append">selection.append</a> on the enter selection. This appends a new circle for each data point to the SVG container.
+
+          </ol><p>Thinking with joins means declaring a relationship between a selection (such as <code>"circle"</code>) and data, and then implementing this relationship through the three <i>enter</i>, <i>update</i> and <i>exit</i> states.
+        </blockquote>
+        </span> 
+      </p>
+
+  </section>
+ 
+  <section style="margin-top: 30px;">
+  <h2> Building Charts using SVGs and D3 </h2>
+  <p>Let's make a simple scatter plot that combines what we know about <code>svg</code>, data joining, CSS, and mouse events. </p>
+
+    <div class="col-xs-12 well">
+      <div class="row">
+        <div class="col-xs-6"  style="background-color: none;">
+          <iframe id="GDP" scrolling ="no" frameborder="0" height="500px" width="100%"></iframe> 
+        </div>
+        <div class="col-xs-6" style="background-color: #fff;">
+          <textarea id="scatter" name="scatter">
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body{
+  font-family: "Lato", "PT Serif", serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 430 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var radius = d3.scale.linear()
+    .range([2, 10]);
+
+var year = d3.scale.threshold()
+    .domain([1980, 1990, 2000, 2010])
+    .range(["#fff", "#ffff99", "#fdc086", "#beaed4", "#7fc97f"])
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .ticks(4);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("data/WorldGDP_GHGs.csv", function(error, data) {
+  // Convert text data to real float using '+' sign.
+  data.forEach(function(d) {
+    d.gdp = +d.WorldGDP_billion_dollars;
+    d.ppm = +d.PPM_CO2;
+    d.e = +d.million_metric_tons_C;
+    d.date = +d.date;
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.gdp; })).nice();
+  y.domain(d3.extent(data, function(d) { return d.ppm; })).nice();
+  radius.domain(d3.extent(data, function(d) { return d.e; }));
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("x", width)
+      .attr("y", -6)
+      .style("text-anchor", "end")
+      .text("Gross Domestic Product, Billion USD");
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Atmospheric CO2, ppm")
+
+  svg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", function(d){ return radius(d.e)})
+      .attr("cx", function(d) { return x(d.gdp); })
+      .attr("cy", function(d) { return y(d.ppm); })
+      .style("fill", function(d) { return year(d.date); });
+
+});
+
+</script>          </textarea>
+              <script>
+              var delay4;
+              // Initialize CodeMirror editor with a nice html5 canvas demo.
+              var editor4 = CodeMirror.fromTextArea(document.getElementById('scatter'), {
+                lineNumbers: true,
+                mode: 'text/html'
+              });
+              editor4.on("change", function() {
+                clearTimeout(delay4);
+                delay = setTimeout(updatePreview4, 300);
+              });
+              
+              function updatePreview4() {
+                var previewFrame4 = document.getElementById('GDP');
+                var preview4 =  previewFrame4.contentDocument ||  previewFrame4.contentWindow.document;
+                preview4.open();
+                preview4.write(editor4.getValue());
+                preview4.close();
+              }
+              setTimeout(updatePreview4, 300);
+            </script> 
+          </div>
+        </div>
+      </div>
+  </section>
+
+ <section style="margin-top: 600px;">
+  <h2> Take Home Example </h2>
+  <p> I left the following data visualization partially completed.  Uncomment sections in the correct order to see the final visualization of bus riders on the 38 Geary Street line in San Francisco. For perspective, a full bus can sit 80 passengers! </p>
+
+    <div class="col-xs-12 well">
+      <div class="row">
+        <div class="col-xs-6"  style="background-color: none;">
+          <iframe id="bus" scrolling ="no" frameborder="0" height="500px" width="100%"></iframe> 
+        </div>
+        <div class="col-xs-6" style="background-color: #fff;">
+          <textarea id="route" name="route">
 <!DOCTYPE html>
 <html>
 <style>
@@ -328,42 +716,40 @@
     */
   });
 </script>
-</html>
-    </textarea>
-  </div>
-
+</html>         </textarea>
+              <script>
+              var delay5;
+              // Initialize CodeMirror editor with a nice html5 canvas demo.
+              var editor5 = CodeMirror.fromTextArea(document.getElementById('route'), {
+                lineNumbers: true,
+                mode: 'text/html'
+              });
+              editor5.on("change", function() {
+                clearTimeout(delay5);
+                delay = setTimeout(updatePreview5, 300);
+              });
+              
+              function updatePreview5() {
+                var previewFrame5 = document.getElementById('bus');
+                var preview5 =  previewFrame5.contentDocument ||  previewFrame5.contentWindow.document;
+                preview5.open();
+                preview5.write(editor5.getValue());
+                preview5.close();
+              }
+              setTimeout(updatePreview5, 300);
+            </script> 
+          </div>
+        </div>
+      </div>
   </section>
-
- 
-
-<script>
-  var delay1;
-  // Initialize CodeMirror editor with a nice html5 canvas demo.
-  var editor1 = CodeMirror.fromTextArea(document.getElementById('code'), {
-    mode: 'text/html'
-  });
-  editor1.on("change", function() {
-    clearTimeout(delay1);
-    delay = setTimeout(updatePreview1, 300);
-  });
-  
-  function updatePreview1() {
-    var previewFrame1 = document.getElementById('preview');
-    var preview1 =  previewFrame1.contentDocument ||  previewFrame1.contentWindow.document;
-    preview1.open();
-    preview1.write(editor1.getValue());
-    preview1.close();
-  }
-  setTimeout(updatePreview1, 300);
-</script> 
 
 
   
            
-              <div class="text-center">
-                <hr>
-                <p>Copyright &copy; Mike Taptich 2014</p>
-              </div>
+    <div class="text-center">
+      <hr>
+      <p>Copyright &copy; Mike Taptich 2015... JK. Take what you want from here.</p>
+    </div>
        
  
 
@@ -371,6 +757,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
   </body>
 </html>
