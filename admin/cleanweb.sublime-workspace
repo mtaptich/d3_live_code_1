@@ -467,7 +467,23 @@
 			"file": "/Users/Mike/d3_live_code_1/index.html",
 			"settings":
 			{
-				"buffer_size": 4458,
+				"buffer_size": 25533,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/Mike/d3_live_code_1/css/setosa.css",
+			"settings":
+			{
+				"buffer_size": 6133,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/Mike/d3_live_code_1/css/codemirror.css",
+			"settings":
+			{
+				"buffer_size": 6367,
 				"line_ending": "Unix"
 			}
 		},
@@ -513,6 +529,12 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/Mike/d3_live_code_1",
+		"/Users/Mike/d3_live_code_1/css",
+		"/Users/Mike/d3_live_code_1/data"
+	],
 	"file_history":
 	[
 		"/Users/Mike/Google Drive/Doctoral Thesis/Projects/Route LCA/Freightsheds/Spatial Modeling/FAF3 Disaggregation/script/commodity_disaggregation_regressions.py",
@@ -646,7 +668,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -660,6 +682,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"code",
+			"sec",
+			"</li>",
 			"uplo",
 			"faf35_data",
 			"faf",
@@ -784,10 +809,7 @@
 			"print",
 			".attr(\"x\", 5)\n	    	.attr(\"y\", -15)",
 			"top: 30",
-			".style(\"font-size\", 20).style(\"font-weight\", \"bold\")",
-			".style(\"font-size\", 18).style(\"font-weight\", \"bold\")",
-			", 1000 kg",
-			"tonnes"
+			".style(\"font-size\", 20).style(\"font-weight\", \"bold\")"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -795,6 +817,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"</li><br>",
 			"",
 			"UPDATE us_rail_all_to_all_2030",
 			"us_rail_all_to_all_2030.",
@@ -921,8 +944,7 @@
 			"model",
 			"1.60934, 0]",
 			"[float(data",
-			",",
-			""
+			","
 		],
 		"reverse": false,
 		"show_context": true,
@@ -930,10 +952,17 @@
 		"whole_word": false,
 		"wrap": true
 	},
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/Mike/d3_live_code_1"
+		}
+	],
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -942,15 +971,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4458,
+						"buffer_size": 25533,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1584,
-								1584
+								16980,
+								16980
 							]
 						],
 						"settings":
@@ -960,14 +989,74 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 226.0,
+						"translation.y": 6929.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/Mike/d3_live_code_1/css/setosa.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6133,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								283,
+								244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
+					"file": "/Users/Mike/d3_live_code_1/css/codemirror.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6367,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								133,
+								133
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"semi_transient": false,
 					"settings":
 					{
@@ -978,8 +1067,8 @@
 						"selection":
 						[
 							[
-								7386,
-								7386
+								182,
+								6581
 							]
 						],
 						"settings":
@@ -989,10 +1078,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2894.0,
+						"translation.y": 5283.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1040,7 +1129,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 50.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1050,7 +1139,7 @@
 		[
 			[
 				"",
-				"SELECT *"
+				"css/codemirror.css"
 			]
 		],
 		"width": 0.0
